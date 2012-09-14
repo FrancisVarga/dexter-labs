@@ -17,7 +17,7 @@ class LoggingManager extends \Processus\Abstracts\Manager\AbstractManager
     public function logDump($loggingData, $prefix = "logging:")
     {
         $memId        = "logging:primKey";
-        $defaultCache = $this->getApplicationContext()->getDefaultCache();
+        $defaultCache = $this->getApplicationContext()->getDefaultCache(\Processus\Consta\MemcachedFactoryType::MEMCACHED_JSON);
         $primKey      = $defaultCache->fetch($memId);
 
         if (empty($primKey)) {
