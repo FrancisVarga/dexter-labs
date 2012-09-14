@@ -37,5 +37,5 @@ while (TRUE) {
         //$logManager->logDump($error, "logging:error:");
         //var_dump($error);
     }
-
+    sleep(5);
 }
