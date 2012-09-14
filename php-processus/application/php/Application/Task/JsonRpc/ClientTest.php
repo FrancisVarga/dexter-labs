@@ -13,14 +13,14 @@ class ClientTest extends \Processus\Abstracts\AbstractTask
     public function run()
     {
         $client = new \Processus\Lib\JsonRpc\Client();
-        $client->setGateway("");
+        $client->setGateway("http://localhost/dexter-labs/php-processus/htdocs/api/v1/app/index.php");
 
         $rpcData = new \Processus\Lib\JsonRpc\JsonRpcDataVo();
-        $rpcData->setMethod("")
-            ->setParams(array())
+        $rpcData->setMethod("App.User.echoPing")
+            ->setParams(array("Hallo hier ist bullshit zu sehen!"))
             ->setRpcId(1);
 
-        $client->sendRpc($rpcData);
+        var_export($client->sendRpc($rpcData));
     }
 
     /**
