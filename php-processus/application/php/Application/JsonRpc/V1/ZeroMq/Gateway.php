@@ -8,7 +8,7 @@ class Gateway extends \Processus\Abstracts\JsonRpc\AbstractJsonRpcGateway
         'enabled'      => TRUE,
         'namespace'    => __NAMESPACE__,
         'validDomains' => array(
-            'ZeroMq'
+            'ZeroMq',
         )
     );
 
