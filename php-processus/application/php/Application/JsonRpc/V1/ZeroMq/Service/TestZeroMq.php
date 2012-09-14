@@ -11,9 +11,13 @@ class TestZeroMq extends \Processus\Abstracts\JsonRpc\AbstractJsonRpcService
 {
     /**
      * @param $params
+     * @return bool
      */
     public function testEcho($params)
     {
-        var_dump($params);
+        $manager = new \Application\Manager\LoggingManager();
+        $manager->logDump($params);
+
+        return $params;
     }
 }
