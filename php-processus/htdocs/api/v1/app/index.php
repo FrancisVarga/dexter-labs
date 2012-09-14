@@ -13,5 +13,3 @@ $bootstrap->init();
 $gtw = new Application\JsonRpc\V1\App\Gateway();
 $bootstrap->setGateway($gtw);
 $gtw->run();
-
-?>
