@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0363795c-efc5-4a46-b522-4df76fd5700d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php-processus/library/Processus" afterPath="$PROJECT_DIR$/php-processus/library/Processus" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="dexter-labs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,7 +102,7 @@
       <file leaf-file-name="ClientTest.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/php-processus/application/php/Application/Task/JsonRpc/ClientTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="35" selection-start="581" selection-end="581" vertical-scroll-proportion="0.5276243">
+            <state line="20" column="26" selection-start="544" selection-end="544" vertical-scroll-proportion="0.47513813">
               <folding>
                 <element signature="e#6#170#0" expanded="true" />
               </folding>
@@ -876,7 +877,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/php-processus/application/php/Application/Task/JsonRpc/ClientTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="35" selection-start="581" selection-end="581" vertical-scroll-proportion="0.5276243">
+        <state line="20" column="26" selection-start="544" selection-end="544" vertical-scroll-proportion="0.47513813">
           <folding>
             <element signature="e#6#170#0" expanded="true" />
           </folding>
