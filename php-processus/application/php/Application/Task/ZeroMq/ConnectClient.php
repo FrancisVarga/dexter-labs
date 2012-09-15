@@ -32,16 +32,6 @@ class ConnectClient extends \Processus\Abstracts\AbstractTask
         $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
         $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
         $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
-        $queue->send(json_encode($mqData), \ZMQ::MODE_NOBLOCK);
     }
 
     /**
