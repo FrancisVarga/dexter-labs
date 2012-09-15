@@ -31,7 +31,8 @@ while (TRUE) {
         $request->init();
         $gtw->setRequest($request);
         $gtw->getServer()->setAutoEmitResponse(FALSE);
-        $socket->send(json_encode($gtw->run()));
+        $gtw->run();
+
     } catch (\Exception $error) {
         $logManager = new \Application\Manager\LoggingManager();
         //$logManager->logDump($error, "logging:error:");
