@@ -8,24 +8,29 @@ require_once($processusCorePath . 'Interfaces/InterfaceApplicationContext.php');
 require_once ($processusCorePath . 'ProcessusBootstrap.php');
 require_once($applicationPath . 'ApplicationBootstrap.php');
 
-$bootstrap = \Application\ApplicationBootstrap::getInstance();
-$bootstrap->init();
-
-$request = new \Application\JsonRpc\V1\ZeroMq\Request();
-$gtw     = new \Application\JsonRpc\V1\ZeroMq\Gateway();
-
-$bootstrap->setGateway($gtw);
-
 $socket = new \ZMQSocket(new \ZMQContext(), \ZMQ::SOCKET_PULL);
 $socket->bind("tcp://0.0.0.0:5555");
+
+gc_enable();
 
 /* Loop receiving and echoing back */
 while (TRUE) {
     try {
+
         $message = $socket->recv(\ZMQ::MODE_NOBLOCK);
         if (empty($message)) {
             continue;
         }
+
+        /** @var $bootstrap \Application\ApplicationBootstrap */
+        $bootstrap = \Application\ApplicationBootstrap::getInstance();
+        $bootstrap->init();
+
+        $request = new \Application\JsonRpc\V1\ZeroMq\Request();
+        $gtw     = new \Application\JsonRpc\V1\ZeroMq\Gateway();
+
+        /** adding gtw to the bootstrap */
+        $bootstrap->setGateway($gtw);
 
         $request->loadJson($message);
         $request->init();
@@ -33,10 +38,14 @@ while (TRUE) {
         $gtw->getServer()->setAutoEmitResponse(FALSE);
         $gtw->run();
 
+        unset($request);
+        unset($gtw);
+        unset($bootstrap);
+
     } catch (\Exception $error) {
         $logManager = new \Application\Manager\LoggingManager();
         //$logManager->logDump($error, "logging:error:");
-        //var_dump($error);
+        var_dump($error);
     }
-    sleep(5);
+    usleep(500);
 }
