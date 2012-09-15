@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>FooBar App Example</title>
+    <title>Dexter Labs</title>
     <meta name="description" content="">
     <meta name="author" content="">
 </head>
