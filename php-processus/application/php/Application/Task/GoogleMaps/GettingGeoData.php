@@ -11,7 +11,7 @@ class GettingGeoData extends \Processus\Abstracts\AbstractTask
 {
     public function run()
     {
-        
+
     }
 
     /**

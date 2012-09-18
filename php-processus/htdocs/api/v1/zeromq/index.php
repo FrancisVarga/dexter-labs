@@ -15,12 +15,10 @@ gc_enable();
 
 /* Loop receiving and echoing back */
 while (TRUE) {
+
     try {
 
         $message = $socket->recv(\ZMQ::MODE_NOBLOCK);
-        if (empty($message)) {
-            continue;
-        }
 
         /** @var $bootstrap \Application\ApplicationBootstrap */
         $bootstrap = \Application\ApplicationBootstrap::getInstance();
@@ -34,6 +32,7 @@ while (TRUE) {
 
         $request->loadJson($message);
         $request->init();
+
         $gtw->setRequest($request);
         $gtw->getServer()->setAutoEmitResponse(FALSE);
         $gtw->run();
@@ -41,11 +40,12 @@ while (TRUE) {
         unset($request);
         unset($gtw);
         unset($bootstrap);
+        unset($message);
 
     } catch (\Exception $error) {
         $logManager = new \Application\Manager\LoggingManager();
         //$logManager->logDump($error, "logging:error:");
         var_dump($error);
     }
-    usleep(500);
+    //usleep(500);
 }
