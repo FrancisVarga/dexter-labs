@@ -25,8 +25,11 @@ class LoggingManager extends \Processus\Abstracts\Manager\AbstractManager
         }
 
         $primId = $defaultCache->getMemClient()->increment($memId);
-        $memId = $prefix . $this->_getSubFix() . ":" . $primId;
-        return $defaultCache->insert($memId, $loggingData, 0);
+        $memId  = $prefix . $this->_getSubFix() . ":" . $primId;
+
+        $defaultCache->insert($memId, $loggingData, 0);
+
+        return $memId;
     }
 
     /**

@@ -14,10 +14,11 @@ class CouchbaseMySqlSync extends \Processus\Abstracts\AbstractTask
     {
         $sqlStmt  = "SHOW TABLES";
         $allTabes = $this->_getDbHandler()->fetchAll($sqlStmt);
-        foreach ($allTabes as $key => $value) {
-            $tableName = array_values($value);
-            $this->_fetchAllDataFromTable($tableName[0]);
-        }
+        $this->_fetchAllDataFromTable("tracking_capabilities");
+//        foreach ($allTabes as $key => $value) {
+//            $tableName = array_values($value);
+//            $this->_fetchAllDataFromTable($tableName[0]);
+//        }
 
     }
 
@@ -29,17 +30,15 @@ class CouchbaseMySqlSync extends \Processus\Abstracts\AbstractTask
             return;
         }
 
-        $maxResult = 10000;
+        $maxResult = 1000;
         $floatPage = $maxRows / $maxResult;
         $pages     = 1;
         $pages     = $pages + round($floatPage, 0, PHP_ROUND_HALF_ODD);
 
-        var_dump($tableName . " // " . $maxRows);
+        var_dump($tableName . " // " . $pages . " // " . $maxRows);
 
         for ($i = 0; $i <= $pages; $i++) {
-            $offset = $i * $maxResult;
-            var_dump("offset: " . $offset);
-
+            $offset   = $i * $maxResult;
             $sqlStmt  = "SELECT * FROM $tableName LIMIT $offset, $maxResult";
             $dbResult = $this->_getDbHandler()->fetchAll($sqlStmt);
             if ($dbResult) {
@@ -52,8 +51,6 @@ class CouchbaseMySqlSync extends \Processus\Abstracts\AbstractTask
 
     private function _saveInCouchbase($data, $tableName)
     {
-        $bulkData = array();
-
         foreach ($data as $value) {
             if (array_key_exists("id", $value)) {
                 $memId = $value['id'] . ":" . $tableName . ":" . $this->_generatePrimId();
@@ -65,18 +62,24 @@ class CouchbaseMySqlSync extends \Processus\Abstracts\AbstractTask
         }
     }
 
+    private function _sendViaZeroMq($data, $tableName)
+    {
+
+    }
+
     /**
      * @var \Processus\Lib\Db\CouchbaseClient
      */
     private $_cbHandler;
 
     /**
-     * @return \Processus\Lib\Db\CouchbaseClient
+     * @return \Processus\Lib\Db\CouchbaseClient|\Processus\Lib\Db\Memcached
      */
     private function _getCbHandler()
     {
         if (!$this->_cbHandler) {
             $this->_cbHandler = new \Processus\Lib\Db\CouchbaseClient("bigdata-server:8091", "Administrator", "Administrator", "bigdata");
+            //$this->_cbHandler = \Processus\Lib\Server\ServerFactory::memcachedFactory("bigdata-server", 11611, NULL, \Processus\Consta\MemcachedFactoryType::MEMCACHED_JSON);
         }
 
         return $this->_cbHandler;

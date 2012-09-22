@@ -1,5 +1,7 @@
 <?php
 
+gc_enable();
+
 $processusCorePath = '../../../../library/Processus/core/';
 $applicationPath   = '../../../../application/php/Application/';
 
@@ -11,14 +13,16 @@ require_once($applicationPath . 'ApplicationBootstrap.php');
 $socket = new \ZMQSocket(new \ZMQContext(), \ZMQ::SOCKET_PULL);
 $socket->bind("tcp://0.0.0.0:5555");
 
-gc_enable();
-
 /* Loop receiving and echoing back */
 while (TRUE) {
 
     try {
 
         $message = $socket->recv(\ZMQ::MODE_NOBLOCK);
+
+        if (empty($message)) {
+            continue;
+        }
 
         /** @var $bootstrap \Application\ApplicationBootstrap */
         $bootstrap = \Application\ApplicationBootstrap::getInstance();
@@ -41,10 +45,11 @@ while (TRUE) {
         unset($gtw);
         unset($bootstrap);
         unset($message);
+        unset($logManager);
 
     } catch (\Exception $error) {
         $logManager = new \Application\Manager\LoggingManager();
-        //$logManager->logDump($error, "logging:error:");
+        $logManager->logDump($error, "logging:error:");
         var_dump($error);
     }
     //usleep(500);
