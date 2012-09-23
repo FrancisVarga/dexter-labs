@@ -14,9 +14,10 @@ class LoggingData extends \Processus\Abstracts\JsonRpc\AbstractJsonRpcService
      */
     public function logToCouchbase($params)
     {
-        $id         = $params['id'];
-        $value      = $params['value'];
-        $expireTime = $params['expired'];
+        $logData    = $params['logData'];
+        $id         = $logData['id'];
+        $value      = $logData['value'];
+        $expireTime = $logData['expired'];
         $serverData = $params['serverData'];
 
         if (empty($serverData['host'])) {
@@ -36,7 +37,7 @@ class LoggingData extends \Processus\Abstracts\JsonRpc\AbstractJsonRpcService
         }
 
         $couchCli   = new \Processus\Lib\Db\CouchbaseClient($serverData['host'], $serverData['user'], $serverData['password'], $serverData['bucket']);
-        $counterID  = "counter:" . __METHOD__;
+        $counterID  = "counter:" . __CLASS__;
         $apiCounter = $couchCli->fetch();
 
         if ($apiCounter) {
@@ -44,6 +45,7 @@ class LoggingData extends \Processus\Abstracts\JsonRpc\AbstractJsonRpcService
         } else {
             $couchCli->insert($counterID, 1);
         }
+
         $couchCli->insert($id, $value, $expireTime);
 
         return;

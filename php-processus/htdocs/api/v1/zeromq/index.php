@@ -45,7 +45,6 @@ while (TRUE) {
         unset($gtw);
         unset($bootstrap);
         unset($message);
-        unset($logManager);
 
     } catch (\Exception $error) {
         $logManager = new \Application\Manager\LoggingManager();
