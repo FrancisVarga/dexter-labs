@@ -8,14 +8,17 @@ All crazy stuff which i tested to conquer the world!
 
 - nginx / apache
 - PHP
-- ZeroMQ
+- [ZeroMQ](http://zeromq.org)
  - ZMQ extension version	1.0.3   
  - libzmq version	2.2.0
+- [Couchbase](http://couchbase.com) 
 
 ## Includes
+
 - ZeroMq
-- Couchbase SDK
+- [Couchbase SDK](http://www.couchbase.com/develop/php/next)
 - Json-Rpc API
+- Some use-cases of [Processus](https://github.com/Crowdpark/processus)
 
 ## License
 Copyright (c) 2012 [Francis Varga](http://varga-multimedia.com)
